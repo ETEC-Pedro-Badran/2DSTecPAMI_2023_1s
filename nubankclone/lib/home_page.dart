@@ -20,19 +20,19 @@ class HomePage extends StatelessWidget {
                   onPressed: () {}, icon: Icon(Icons.help_outline_outlined))
             ],
             bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children: const [
                     Padding(
-                      padding: const EdgeInsets.only(left: 18.0, bottom: 18),
+                      padding: EdgeInsets.only(left: 18.0, bottom: 18),
                       child: Text(
                         "Prof. Evaldo",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
-                ),
-                preferredSize: Size.fromHeight(40))),
+                ))),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
           child: Row(
