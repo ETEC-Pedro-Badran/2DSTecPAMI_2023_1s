@@ -38,8 +38,15 @@ class HomePage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Text("Conta PJ"),
-              Icon(Icons.keyboard_arrow_right_sharp),
+              Text(
+                "Conta PJ",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              Icon(
+                Icons.keyboard_arrow_right_rounded,
+                size: 20,
+                color: Colors.black54,
+              ),
             ],
           ),
         ));
