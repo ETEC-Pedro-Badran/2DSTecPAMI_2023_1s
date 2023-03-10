@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nubankclone/opcoes_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -56,11 +59,11 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 18,
               ),
-              Text(
+              const Text(
                 r'R$ 2.500,52',
-                style: GoogleFonts.lexend(
-                    fontSize: 26, fontWeight: FontWeight.bold),
-              )
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              ),
+              OpcaoWidget(icon: Icons.pix, rotulo: "Pix")
             ],
           ),
         ));
