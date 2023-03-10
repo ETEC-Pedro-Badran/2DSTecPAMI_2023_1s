@@ -8,21 +8,24 @@ class OpcaoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-            padding: EdgeInsets.all(10),
-            decoration:
-                BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
-            child: Icon(icon)),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          rotulo,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: Column(
+        children: [
+          Container(
+              padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                  color: Colors.grey[300], shape: BoxShape.circle),
+              child: Icon(icon)),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            rotulo,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 }

@@ -63,7 +63,18 @@ class HomePage extends StatelessWidget {
                 r'R$ 2.500,52',
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
-              OpcaoWidget(icon: Icons.pix, rotulo: "Pix")
+              const SizedBox(
+                height: 25,
+              ),
+              Row(
+                children: const [
+                  OpcaoWidget(icon: Icons.pix, rotulo: "Pix"),
+                  OpcaoWidget(icon: Icons.pix, rotulo: "Pix"),
+                  OpcaoWidget(icon: Icons.pix, rotulo: "Pix"),
+                  OpcaoWidget(icon: Icons.pix, rotulo: "Pix"),
+                  OpcaoWidget(icon: Icons.pix, rotulo: "Pix"),
+                ],
+              )
             ],
           ),
         ));
