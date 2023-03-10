@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -35,18 +36,31 @@ class HomePage extends StatelessWidget {
                 ))),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Conta PJ",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_right_rounded,
+                    size: 20,
+                    color: Colors.black54,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 18,
+              ),
               Text(
-                "Conta PJ",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              Icon(
-                Icons.keyboard_arrow_right_rounded,
-                size: 20,
-                color: Colors.black54,
-              ),
+                r'R$ 2.500,52',
+                style: GoogleFonts.lexend(
+                    fontSize: 26, fontWeight: FontWeight.bold),
+              )
             ],
           ),
         ));
