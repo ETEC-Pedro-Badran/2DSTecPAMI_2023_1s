@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nubankclone/extrato_page.dart';
 import 'package:nubankclone/opcoes_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -47,17 +48,24 @@ class HomePage extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "Conta PJ",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
-                        Icon(
-                          Icons.keyboard_arrow_right_rounded,
-                          size: 20,
-                          color: Colors.black54,
-                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const ExtratoPage(),
+                            ));
+                          },
+                          icon: const Icon(
+                            Icons.keyboard_arrow_right_rounded,
+                            size: 20,
+                            color: Colors.black54,
+                          ),
+                        )
                       ],
                     ),
                     const SizedBox(
