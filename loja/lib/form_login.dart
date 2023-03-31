@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
-class FormLogin extends StatelessWidget {
+class FormLogin extends StatefulWidget {
   const FormLogin({super.key});
+
+  @override
+  State<FormLogin> createState() => _FormLoginState();
+}
+
+class _FormLoginState extends State<FormLogin> {
+  var visivel = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      width: MediaQuery.of(context).size.width *
+          0.8, //largura propocional ao da tela
       child: Form(
           child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -16,13 +24,30 @@ class FormLogin extends StatelessWidget {
                 labelText: "Email", prefixIcon: Icon(Icons.email)),
           ),
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: "Senha",
               prefixIcon: Icon(Icons.key),
-              suffixIcon: Icon(Icons.visibility),
+              suffixIcon: IconButton(
+                icon: Icon(!visivel ? Icons.visibility : Icons.visibility_off),
+                onPressed: () {
+                  setState(() {
+                    visivel = !visivel;
+                    print(visivel);
+                  });
+                },
+              ),
             ),
-            obscureText: true,
+            obscureText: !visivel, // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             obscuringCharacter: "*",
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, "/");
+            },
+            child: Text("Entrar"),
           )
         ],
       )),
