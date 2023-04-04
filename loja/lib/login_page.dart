@@ -15,7 +15,19 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(height: 100, width: 100, "imagens/logo.png"),
-              FormLogin()
+              FormLogin(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Ou",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/registrar');
+                  },
+                  child: Text("Registrar-se"))
             ],
           ),
         ],
