@@ -9,7 +9,7 @@ class FormRegistro extends StatefulWidget {
 }
 
 class _FormRegistroState extends State<FormRegistro> {
-  Usuario usuario = Usuario('', '', '');
+  Usuario usuario = Usuario();
 
   final key = GlobalKey<FormState>();
 
@@ -30,13 +30,27 @@ class _FormRegistroState extends State<FormRegistro> {
                     return null;
                   }
                 },
+                onsaved: (value) => usuario.nome = value, // <<<<<
               ),
-              input('E-mail'),
-              input('Senha'),
-              input('Confirma Senha'),
+              input(
+                'E-mail',
+                onsaved: (value) => usuario.email = value, // <<<<<
+              ),
+              input('Senha',
+                  validacao: (value) => (value?.length ?? 0) < 3
+                      ? "Senha deve ter no mínimo 3 caracteres"
+                      : null,
+                  onchange: (value) => usuario.senha = value,
+                  senha: true),
+              input('Confirma Senha',
+                  validacao: (value) =>
+                      value == usuario.senha ? null : "Senha não confere!",
+                  senha: true),
               ElevatedButton(
                   onPressed: () {
-                    key.currentState?.validate();
+                    if (key.currentState?.validate() ?? false) {
+                      key.currentState?.save();
+                    }
                   },
                   child: Text('Salvar'))
             ],
@@ -44,13 +58,20 @@ class _FormRegistroState extends State<FormRegistro> {
     );
   }
 
-  input(String label, {String? Function(String? value)? validacao}) {
+  input(String label,
+      {String? Function(String? value)? validacao,
+      Function(String? value)? onchange,
+      Function(String? value)? onsaved, // <<<<<
+      bool senha = false}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
           decoration:
               InputDecoration(label: Text(label), border: OutlineInputBorder()),
-          validator: validacao),
-    );
+          validator: validacao,
+          onChanged: onchange,
+          onSaved: onsaved, // <<<<<
+          obscureText: senha,
+        ));
   }
 }
