@@ -34,7 +34,10 @@ class _FormRegistroState extends State<FormRegistro> {
               ),
               input(
                 'E-mail',
-                onsaved: (value) => usuario.email = value, // <<<<<
+                onsaved: (value) => usuario.email = value,
+                validacao: (value) => !(value?.contains("@") ?? false)
+                    ? "E-mail inválido"
+                    : null, // <<<<<
               ),
               input('Senha',
                   validacao: (value) => (value?.length ?? 0) < 3
