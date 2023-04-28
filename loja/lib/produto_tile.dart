@@ -10,6 +10,7 @@ class ProdutoTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image.network(
               "https://a-static.mlcdn.com.br/618x463/smartphone-samsung-galaxy-a23-128gb-branco-4g-octa-core-4gb-ram-66-cam-quadrupla-selfie-8mp/magazineluiza/234749900/ca9fa16bf1cfd38bb5923eec9e2cfd53.jpg",
@@ -51,9 +52,6 @@ class ProdutoTile extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            SizedBox(
-              height: 20,
             ),
             ElevatedButton(onPressed: () {}, child: Text("Comprar"))
           ],

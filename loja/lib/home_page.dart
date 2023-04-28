@@ -7,13 +7,20 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.width);
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text("Loja ETEC"),
         ),
         body: GridView.count(
-          crossAxisCount: 3,
+          crossAxisCount: MediaQuery.of(context).size.width < 293
+              ? 1
+              : MediaQuery.of(context).size.width < 441
+                  ? 2
+                  : MediaQuery.of(context).size.width < 600
+                      ? 3
+                      : 4,
           mainAxisSpacing: 2,
           crossAxisSpacing: 2,
           children: [
