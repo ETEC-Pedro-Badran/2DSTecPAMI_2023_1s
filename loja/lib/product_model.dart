@@ -13,23 +13,23 @@ class ProductList {
 
 class Product {
   int id;
-  String brand;
-  String name;
-  double price;
-  String priceSign;
-  String currency;
-  String imageLink;
-  String productLink;
-  String websiteLink;
-  String description;
+  String? brand;
+  String? name;
+  double? price;
+  String? priceSign;
+  String? currency;
+  String? imageLink;
+  String? productLink;
+  String? websiteLink;
+  String? description;
   double? rating;
-  String category;
-  String productType;
-  List<String> tagList;
-  DateTime createdAt;
-  DateTime updatedAt;
-  String productApiUrl;
-  String apiFeaturedImage;
+  String? category;
+  String? productType;
+  List<String>? tagList;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? productApiUrl;
+  String? apiFeaturedImage;
   List<ProductColor> productColors;
 
   Product({
@@ -66,13 +66,13 @@ class Product {
       brand: json['brand'],
       name: json['name'],
       price: double.parse(json['price']),
-      priceSign: json['price_sign'],
-      currency: json['currency'],
+      priceSign: json['price_sign'] ?? "R\$",
+      currency: json['currency'] ?? "",
       imageLink: json['image_link'],
       productLink: json['product_link'],
       websiteLink: json['website_link'],
       description: json['description'],
-      rating: json['rating'] != null ? double.parse(json['rating']) : null,
+      rating: json['rating'] != null ? json['rating'] : null,
       category: json['category'],
       productType: json['product_type'],
       tagList: List<String>.from(json['tag_list']),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:loja/product_model.dart';
 
 class ProdutoTile extends StatelessWidget {
-  const ProdutoTile({super.key});
+  final Product produto;
+  const ProdutoTile({super.key, required this.produto});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +15,11 @@ class ProdutoTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image.network(
-              "https://a-static.mlcdn.com.br/618x463/smartphone-samsung-galaxy-a23-128gb-branco-4g-octa-core-4gb-ram-66-cam-quadrupla-selfie-8mp/magazineluiza/234749900/ca9fa16bf1cfd38bb5923eec9e2cfd53.jpg",
+              this.produto.imageLink ?? "",
               fit: BoxFit.contain,
             ),
             Text(
-              "Smartphone Samsung Galaxy A23 128GB Branco 4G - Octa-Core 4GB RAM 6,6” Câm Quádrupla + Selfie 8MP",
+              produto.description ?? "",
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
             ),
@@ -30,7 +32,7 @@ class ProdutoTile extends StatelessWidget {
                   children: [
                     Text("Por"),
                     Text(
-                      r"R$",
+                      "${produto.priceSign}",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -44,7 +46,7 @@ class ProdutoTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    "1.199",
+                    "${produto.price?.toStringAsFixed(2)}",
                     style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.w700,

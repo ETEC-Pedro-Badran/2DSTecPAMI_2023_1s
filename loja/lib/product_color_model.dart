@@ -1,6 +1,6 @@
 class ProductColor {
-  String hexValue;
-  String colorName;
+  String? hexValue;
+  String? colorName;
 
   ProductColor({required this.hexValue, required this.colorName});
 
