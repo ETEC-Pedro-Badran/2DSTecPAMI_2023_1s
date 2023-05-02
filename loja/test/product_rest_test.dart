@@ -11,6 +11,6 @@ void main() {
           200);
     });
     var produtos = await ProductRest().obterProdutos(client);
-    print(produtos);
+    expect(produtos, isNotEmpty, reason: "Não recuperou os produtos!");
   });
 }
