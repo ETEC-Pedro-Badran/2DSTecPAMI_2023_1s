@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:loja/registro_page.dart';
 
+import 'app_store.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  final AppStore appStore;
+  const App({super.key, required this.appStore});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +17,13 @@ class App extends StatelessWidget {
       //home: LoginPage(),
       initialRoute: "/login",
       routes: {
-        '/login': (context) => LoginPage(),
+        '/login': (context) => LoginPage(
+              appStore: appStore,
+            ),
         '/registrar': (context) => RegistroPage(),
-        '/': (context) => HomePage()
+        '/': (context) => HomePage(
+              appStore: appStore,
+            )
       },
     );
   }

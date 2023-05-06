@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja/app_store.dart';
 
 import 'app.dart';
 
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return App();
+    AppStore appStore = AppStore();
+    return App(appStore: appStore);
   }
 }

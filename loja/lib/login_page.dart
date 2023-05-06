@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'app_store.dart';
 import 'form_login.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final AppStore appStore;
+  const LoginPage({super.key, required this.appStore});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +17,11 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(height: 100, width: 100, "imagens/logo.png"),
-              FormLogin(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              FormLogin(
+                appStore: appStore,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   "Ou",
                   style: TextStyle(fontSize: 16),

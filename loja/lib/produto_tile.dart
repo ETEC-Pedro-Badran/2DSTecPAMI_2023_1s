@@ -19,12 +19,9 @@ class ProdutoTile extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             Text(
-              produto.description ?? "",
-              maxLines: 4,
+              produto.name ?? "",
+              maxLines: 3,
               overflow: TextOverflow.ellipsis,
-            ),
-            SizedBox(
-              height: 20,
             ),
             Row(
               children: [
@@ -32,7 +29,7 @@ class ProdutoTile extends StatelessWidget {
                   children: [
                     Text("Por"),
                     Text(
-                      "${produto.priceSign}",
+                      "${produto.priceSign}${produto.currency}",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,

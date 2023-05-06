@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:loja/usuario_model.dart';
 
+import 'usuario_rest.dart';
+import 'package:http/http.dart' as http;
+
 class FormRegistro extends StatefulWidget {
   const FormRegistro({super.key});
 
@@ -50,12 +53,25 @@ class _FormRegistroState extends State<FormRegistro> {
                       value == usuario.senha ? null : "Senha não confere!",
                   senha: true),
               ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (key.currentState?.validate() ?? false) {
                       key.currentState?.save();
+                      try {
+                        await UsuarioRest().inserir(http.Client(), usuario);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content:
+                                    Text("Usuário registrado com sucesso!")));
+                        Navigator.of(context).pop();
+                      } catch (e) {
+                        print(e);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Registro de usuário falhou!")));
+                      }
                     }
                   },
-                  child: Text('Salvar'))
+                  child: const Text('Salvar'))
             ],
           )),
     );
