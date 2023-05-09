@@ -5,17 +5,17 @@ import 'package:loja/usuario_model.dart';
 import 'package:loja/usuario_rest.dart';
 
 void main() {
-  testWidgets('usuario rest ...', (tester) async {
-    var client = MockClient((request) => Future.value(http.Response("", 200)));
+  testWidgets('inserir usuario rest ...', (tester) async {
+    var client = MockClient((request) => Future.value(http.Response('{"ok":true}', 200)));
     var usuario = Usuario(
         email: "teste@xmail.com.br", nome: "Teste", senha: "A8765i4321&");
 
     await UsuarioRest().inserir(client, usuario);
   });
 
-  testWidgets('valida usuario rest ...', (tester) async {
+  testWidgets('validar usuario rest ...', (tester) async {
     var client = MockClient((request) => Future.value(http.Response(
-        '[{"ok":true,"usuario":{"id":"1","email": "teste@xmail.com.br", "nome": "Teste"}}]',
+        '[{"ok":true,"usuario":{"id":1,"email": "teste@xmail.com.br", "nome": "Teste"}}]',
         200)));
 
     Usuario usuario = await UsuarioRest()
@@ -23,7 +23,7 @@ void main() {
     expect(usuario, isNotNull);
   });
 
-  testWidgets('valida senha inválida usuario rest ...', (tester) async {
+  testWidgets('confirmar senha usuario rest ...', (tester) async {
     var client = MockClient((request) => Future.value(http.Response('', 403)));
 
     try {
