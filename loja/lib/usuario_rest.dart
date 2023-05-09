@@ -14,7 +14,7 @@ class UsuarioRest {
       Uri.parse(_url), // endereço do servidor, e o recurso
       body: json.encode(usuario.toJson()) // converte o usuário para uma string em formato json
     ).then((value) {
-       if (value.statusCode==200 && !value.body.contains("Duplicate entry"))  {
+       if (value.statusCode!=200 && !value.body.contains("Duplicate entry"))  {
         throw "Usuário já registrado anteriormente!";
        } else if (!json.decode(value.body)["ok"]) {
         throw "Falha no registro do usuário.Tente novamente!";
@@ -36,8 +36,8 @@ class UsuarioRest {
           throw "Usuário já foi registrado anteriormente.";
         } else {
           var json_data = json.decode(value.body);
-          if (json_data.length > 0 && json_data[0]['ok']) {
-            return Usuario.fromJson(json_data[0]['usuario']);
+          if (json_data.length > 0 && json_data['ok']) {
+            return Usuario.fromJson(json_data['usuario']);
           } else {
             throw "Usuário não identificado";
           }

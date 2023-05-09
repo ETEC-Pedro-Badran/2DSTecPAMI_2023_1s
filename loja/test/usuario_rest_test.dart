@@ -15,7 +15,7 @@ void main() {
 
   testWidgets('validar usuario rest ...', (tester) async {
     var client = MockClient((request) => Future.value(http.Response(
-        '[{"ok":true,"usuario":{"id":1,"email": "teste@xmail.com.br", "nome": "Teste"}}]',
+        '{"ok":true,"usuario":{"id":1,"email": "teste@xmail.com.br", "nome": "Teste"}}',
         200)));
 
     Usuario usuario = await UsuarioRest()
