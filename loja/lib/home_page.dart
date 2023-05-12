@@ -107,7 +107,9 @@ class _HomePageState extends State<HomePage> {
                     right: -5,
                     top: -5,
                     child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/perfil");
+                        },
                         icon: Icon(
                           shadows: kElevationToShadow[1],
                           Icons.settings_rounded,

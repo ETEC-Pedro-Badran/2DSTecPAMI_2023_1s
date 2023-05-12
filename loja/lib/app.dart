@@ -4,6 +4,7 @@ import 'package:loja/registro_page.dart';
 import 'app_store.dart';
 import 'home_page.dart';
 import 'login_page.dart';
+import 'perfil_page.dart';
 
 class App extends StatelessWidget {
   final AppStore appStore;
@@ -21,9 +22,10 @@ class App extends StatelessWidget {
               appStore: appStore,
             ),
         '/registrar': (context) => RegistroPage(),
+        '/perfil': (context) => PerfilPage(),
         '/': (context) => HomePage(
               appStore: appStore,
-            )
+            ),
       },
     );
   }
