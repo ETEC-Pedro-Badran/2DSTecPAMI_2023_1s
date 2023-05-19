@@ -6,7 +6,8 @@ import 'package:loja/usuario_rest.dart';
 
 void main() {
   testWidgets('inserir usuario rest ...', (tester) async {
-    var client = MockClient((request) => Future.value(http.Response('{"ok":true}', 200)));
+    var client = MockClient(
+        (request) => Future.value(http.Response('{"ok":true}', 200)));
     var usuario = Usuario(
         email: "teste@xmail.com.br", nome: "Teste", senha: "A8765i4321&");
 

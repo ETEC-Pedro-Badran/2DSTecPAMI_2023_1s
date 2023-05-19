@@ -22,7 +22,9 @@ class App extends StatelessWidget {
               appStore: appStore,
             ),
         '/registrar': (context) => RegistroPage(),
-        '/perfil': (context) => PerfilPage(),
+        '/perfil': (context) => PerfilPage(
+              appStore: appStore,
+            ),
         '/': (context) => HomePage(
               appStore: appStore,
             ),
