@@ -89,8 +89,7 @@ class _PerfilPageState extends State<PerfilPage> {
   Future<void> obterFoto(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     var file = await picker.pickImage(source: source);
-    setState(() async {
-      usuario.foto = await file?.path ?? null;
-    });
+    usuario.foto = await file?.path ?? null;
+    setState(() {});
   }
 }
