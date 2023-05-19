@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'usuario_model.dart';
 import 'package:http/http.dart' as http;
@@ -37,6 +38,28 @@ class UsuarioRest {
         } else {
           throw "Usuário não identificado";
         }
+      }
+    });
+  }
+
+  /**Função para enviar foto do usuario */
+  Future<bool> enviarFoto(String url, Usuario usuario) async {
+    Uri uri = Uri.parse("$_url/usuario.php");
+    var request = http.MultipartRequest("POST", uri);
+
+    Map<String, String> _body = {"usuario_id": "${usuario.id}"};
+    request.fields.addAll(_body);
+
+    request.files.add(http.MultipartFile.fromBytes(
+      "foto",
+      await File.fromUri(Uri.parse(usuario.foto!)).readAsBytes(),
+    ));
+
+    return await request.send().then((response) {
+      if (response.statusCode < 200 || response.statusCode > 400) {
+        throw response.reasonPhrase!;
+      } else {
+        return true;
       }
     });
   }
