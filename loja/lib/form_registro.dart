@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:loja/usuario_model.dart';
 
-import 'usuario_rest.dart';
-import 'package:http/http.dart' as http;
-
 class FormRegistro extends StatefulWidget {
-  const FormRegistro({super.key});
+  final Usuario? inicial; // usuario para ser alterado
+  final Future<void> Function(Usuario usuario)
+      onSave; // método para salvar o usuário
+  const FormRegistro({super.key, this.inicial, required this.onSave});
 
   @override
   State<FormRegistro> createState() => _FormRegistroState();
 }
 
 class _FormRegistroState extends State<FormRegistro> {
-  Usuario usuario = Usuario();
+  late Usuario usuario;
+  @override
+  void initState() {
+    usuario = widget.inicial ?? Usuario();
+    super.initState();
+  }
 
   final key = GlobalKey<FormState>();
 
@@ -24,24 +29,22 @@ class _FormRegistroState extends State<FormRegistro> {
           key: key,
           child: Column(
             children: [
-              input(
-                'Nome',
-                validacao: (value) {
-                  if ((value?.length ?? 0) < 2) {
-                    return 'Nome deve ter mais que dois caracteres';
-                  } else {
-                    return null;
-                  }
-                },
-                onsaved: (value) => usuario.nome = value, // <<<<<
-              ),
-              input(
-                'E-mail',
-                onsaved: (value) => usuario.email = value,
-                validacao: (value) => !(value?.contains("@") ?? false)
-                    ? "E-mail inválido"
-                    : null, // <<<<<
-              ),
+              input('Nome',
+                  validacao: (value) {
+                    if ((value?.length ?? 0) < 2) {
+                      return 'Nome deve ter mais que dois caracteres';
+                    } else {
+                      return null;
+                    }
+                  },
+                  onsaved: (value) => usuario.nome = value, // <<<<<
+                  valorInicial: usuario.nome),
+              input('E-mail',
+                  onsaved: (value) => usuario.email = value,
+                  validacao: (value) => !(value?.contains("@") ?? false)
+                      ? "E-mail inválido"
+                      : null, // <<<<<
+                  valorInicial: usuario.email),
               input('Senha',
                   validacao: (value) => (value?.length ?? 0) < 3
                       ? "Senha deve ter no mínimo 3 caracteres"
@@ -57,8 +60,9 @@ class _FormRegistroState extends State<FormRegistro> {
                     if (key.currentState?.validate() ?? false) {
                       key.currentState?.save();
                       try {
-                        await UsuarioRest().inserir(http.Client(), usuario);
-                        ScaffoldMessenger.of(context).showSnackBar(
+                        //await UsuarioRest().inserir(http.Client(), usuario);
+                        await widget.onSave(usuario);
+                        await ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content:
                                     Text("Usuário registrado com sucesso!")));
@@ -81,10 +85,12 @@ class _FormRegistroState extends State<FormRegistro> {
       {String? Function(String? value)? validacao,
       Function(String? value)? onchange,
       Function(String? value)? onsaved, // <<<<<
-      bool senha = false}) {
+      bool senha = false,
+      dynamic? valorInicial}) {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextFormField(
+          initialValue: valorInicial,
           decoration:
               InputDecoration(label: Text(label), border: OutlineInputBorder()),
           validator: validacao,

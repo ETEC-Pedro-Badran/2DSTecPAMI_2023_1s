@@ -43,8 +43,7 @@ class UsuarioRest {
   }
 
   /**Função para enviar foto do usuario */
-  Future<bool> enviarFoto(
-      http.Client client, String url, Usuario usuario) async {
+  Future<bool> enviarFoto(http.Client client, Usuario usuario) async {
     Uri uri = Uri.parse("$_url/usuario.php");
     var request = http.MultipartRequest("POST", uri);
 

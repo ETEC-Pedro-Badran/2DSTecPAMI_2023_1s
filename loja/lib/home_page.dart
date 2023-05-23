@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:loja/produto_tile.dart';
 
@@ -70,7 +72,9 @@ class _HomePageState extends State<HomePage> {
                 shadows: kElevationToShadow[1],
                 color: Colors.grey[600],
               )
-            : Image.network(widget.appStore.identificado!.foto!),
+            : widget.appStore.identificado!.foto!.contains("http://")
+                ? Image.network(widget.appStore.identificado!.foto!)
+                : Image.file(File(widget.appStore.identificado!.foto!)),
       ),
       onPressed: onPress,
     );

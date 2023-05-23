@@ -6,6 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'app_store.dart';
 import 'form_registro.dart';
 import 'usuario_model.dart';
+import 'package:http/http.dart' as http;
+
+import 'usuario_rest.dart';
 
 class PerfilPage extends StatefulWidget {
   final AppStore appStore;
@@ -52,7 +55,18 @@ class _PerfilPageState extends State<PerfilPage> {
                     ))
               ],
             ),
-            const FormRegistro(),
+            FormRegistro(
+                inicial: widget.appStore.identificado,
+                onSave: (alterado) async {
+                  try {
+                    alterado.foto = usuario.foto;
+                    widget.appStore.identificado = alterado;
+                    await UsuarioRest().enviarFoto(http.Client(), alterado);
+                    Navigator.pop(context); // fechando a tela atual
+                  } catch (e) {
+                    print(e);
+                  }
+                }),
           ],
         ),
       ),
