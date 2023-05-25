@@ -59,20 +59,9 @@ class _FormRegistroState extends State<FormRegistro> {
                   onPressed: () async {
                     if (key.currentState?.validate() ?? false) {
                       key.currentState?.save();
-                      try {
-                        //await UsuarioRest().inserir(http.Client(), usuario);
+                      
                         await widget.onSave(usuario);
-                        await ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content:
-                                    Text("Usuário registrado com sucesso!")));
-                        Navigator.of(context).pop();
-                      } catch (e) {
-                        print(e);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text("Registro de usuário falhou!")));
-                      }
+                      
                     }
                   },
                   child: const Text('Salvar'))

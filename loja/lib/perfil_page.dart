@@ -61,10 +61,12 @@ class _PerfilPageState extends State<PerfilPage> {
                   try {
                     alterado.foto = usuario.foto;
                     widget.appStore.identificado = alterado;
-                    await UsuarioRest().enviarFoto(http.Client(), alterado);
+                    await UsuarioRest().atualizar(http.Client(),alterado);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Atualização concluída!")));
                     Navigator.pop(context); // fechando a tela atual
                   } catch (e) {
                     print(e);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Atualização do perfil do usuário falhou!")));
                   }
                 }),
           ],

@@ -5,7 +5,8 @@ import 'usuario_model.dart';
 import 'package:http/http.dart' as http;
 
 class UsuarioRest {
-  static const _url = "http://172.16.100.38:8080/usuario.php";
+  //static const _url = "http://172.16.100.38:8080/usuario.php";
+  static const _url = "http://172.16.100.76:8080/usuario.php";
 
   Future<void> inserir(http.Client client, Usuario usuario) async {
     return client
@@ -14,7 +15,9 @@ class UsuarioRest {
                 .toJson()) // converte o usuário para uma string em formato json
             )
         .then((value) {
-      if (value.statusCode != 200 && !value.body.contains("Duplicate entry")) {
+      if (value.statusCode == 500) {
+        throw "Erro interno do servidor!";
+      } else if (value.statusCode != 200 && !value.body.contains("Duplicate entry")) {
         throw "Usuário já registrado anteriormente!";
       } else if (!json.decode(value.body)["ok"]) {
         throw "Falha no registro do usuário.Tente novamente!";
@@ -43,19 +46,17 @@ class UsuarioRest {
   }
 
   /**Função para enviar foto do usuario */
-  Future<bool> enviarFoto(http.Client client, Usuario usuario) async {
+  Future<bool> atualizar(http.Client client, Usuario usuario) async {
     Uri uri = Uri.parse("$_url/usuario.php");
-    var request = http.MultipartRequest("POST", uri);
-
-    Map<String, String> _body = {"usuario_id": "${usuario.id}"};
-    request.fields.addAll(_body);
-
-    request.files.add(http.MultipartFile.fromBytes(
-      "foto",
-      await File.fromUri(Uri.parse(usuario.foto!)).readAsBytes(),
-    ));
-
-    return await request.send().then((response) {
+    Map<String,String> data = usuario.toJson()!;
+    String? foto;
+    /** Caso o caminho para a imagem for um de um arquivo no armazenamento local do dispositivo */
+    if (usuario.foto!=null && !Uri.parse(usuario.foto!).isScheme("HTTP") && !Uri.parse(usuario.foto!).isScheme("HTTPS"))     {
+      File file = await File.fromUri(Uri.parse(usuario.foto!)); // carregue o arquivo dentro de objeto File
+      foto = base64Encode(file.readAsBytesSync());
+      data['upload'] = foto;
+    }
+    return await client.post(uri,body:data).then((response) {
       if (response.statusCode < 200 || response.statusCode > 400) {
         throw response.reasonPhrase!;
       } else {
@@ -64,3 +65,4 @@ class UsuarioRest {
     });
   }
 }
+

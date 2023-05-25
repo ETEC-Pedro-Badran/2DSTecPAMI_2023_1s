@@ -10,7 +10,7 @@ class Usuario {
 
   //Converte o objeto para uma representação em Map<String,String>
   Map<String, String>? toJson() {
-    return {"nome": nome!, "email": email!, "senha": senha!};
+    return {"nome": nome!, "email": email!, "senha": senha!,...id!=null?{"id":"$id"}:{}};
   }
 
   //Converte um Map<String,dynamic> em um objeto Usuario
