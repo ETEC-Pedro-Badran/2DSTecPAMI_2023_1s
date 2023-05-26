@@ -94,14 +94,14 @@ class _HomePageState extends State<HomePage> {
                     avatar(context, tamanho: 100),
                     Text(
                       widget.appStore.identificado?.nome ?? "",
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 25,
                           color: Colors.blueGrey,
                           fontWeight: FontWeight.w500),
                     ),
                     Text(
                       widget.appStore.identificado?.email ?? "",
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 12,
                           color: Colors.blueGrey,
                           fontWeight: FontWeight.w500),

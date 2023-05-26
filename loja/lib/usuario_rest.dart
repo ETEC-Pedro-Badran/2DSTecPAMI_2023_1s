@@ -5,8 +5,9 @@ import 'usuario_model.dart';
 import 'package:http/http.dart' as http;
 
 class UsuarioRest {
-  //static const _url = "http://172.16.100.38:8080/usuario.php";
-  static const _url = "http://172.16.100.76:8080/usuario.php";
+  static const _host = "http://172.16.100.38:8080";
+  static const _url = "$_host/usuario.php";
+  //static const _url = "http://172.16.100.76:8080/usuario.php";
 
   Future<void> inserir(http.Client client, Usuario usuario) async {
     return client
@@ -37,7 +38,11 @@ class UsuarioRest {
       } else {
         var json_data = json.decode(value.body);
         if (json_data.length > 0 && json_data['ok']) {
-          return Usuario.fromJson(json_data['usuario']);
+          var usuario =  Usuario.fromJson(json_data['usuario']);
+          if (usuario.foto!=null) {
+            usuario.foto = "$_host/imagens/${usuario.foto}";
+          }
+          return usuario;
         } else {
           throw "Usuário não identificado";
         }

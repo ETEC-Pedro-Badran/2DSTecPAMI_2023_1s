@@ -10,7 +10,17 @@ class RegistroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FormRegistro(
-        onSave: (usuario) => UsuarioRest().inserir(http.Client(), usuario),
+        onSave: (usuario) async {
+          try {
+             await UsuarioRest().inserir(http.Client(), usuario);
+             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Atualização concluída!")));
+             Navigator.pop(context); // fechando a tela atual
+
+          } catch(e){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("$e")));
+          }
+          
+        },
       ),
       appBar: AppBar(
         title: const Text('Registro'),
